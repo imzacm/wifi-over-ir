@@ -1,0 +1,67 @@
+{
+  "version": 6,
+  "include": [
+    "cmake/presets/devkitpro.json",
+    "cmake/presets/watcom.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "watcom-dos16-debug",
+      "inherits": "watcom-dos16",
+      "hidden": false,
+      "displayName": "Debug - OpenWatcom V2 (DOS 16-bit)",
+      "description": "Build 16-bit DOS using OpenWatcom V2",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      },
+      "environment": {
+        "WATCOM": "$env{HOME}/.watcom"
+      }
+    },
+    {
+      "name": "watcom-dos16-release",
+      "inherits": "watcom-dos16",
+      "hidden": false,
+      "displayName": "Release - OpenWatcom V2 (DOS 16-bit)",
+      "description": "Build 16-bit DOS using OpenWatcom V2",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      },
+      "environment": {
+        "WATCOM": "$env{HOME}/.watcom"
+      }
+    },
+    {
+      "name": "devkitpro-arm-3ds-debug",
+      "inherits": "devkitpro-arm-3ds",
+      "hidden": false,
+      "displayName": "Debug - DevkitPro (3DS)",
+      "description": "Build for 3DS using DevkitPro",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      },
+      "environment": {
+        "DEVKITPRO": "/opt/devkitpro",
+        "MAKEROM_DIR": "$env{HOME}/Sources/Project_CTR/makerom/bin",
+        "CTRTOOL_DIR": "$env{HOME}/Sources/Project_CTR/ctrtool/bin",
+        "BANNERTOOL_DIR": "$env{HOME}/Sources/bannertool/output/linux-x86_64"
+      }
+    },
+    {
+      "name": "devkitpro-arm-3ds-release",
+      "inherits": "devkitpro-arm-3ds",
+      "hidden": false,
+      "displayName": "Release - DevkitPro (3DS)",
+      "description": "Build for 3DS using DevkitPro",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      },
+      "environment": {
+        "DEVKITPRO": "/opt/devkitpro",
+        "MAKEROM_DIR": "$env{HOME}/Sources/Project_CTR/makerom/bin",
+        "CTRTOOL_DIR": "$env{HOME}/Sources/Project_CTR/ctrtool/bin",
+        "BANNERTOOL_DIR": "$env{HOME}/Sources/bannertool/output/linux-x86_64"
+      }
+    }
+  ]
+}

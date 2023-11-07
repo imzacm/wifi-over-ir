@@ -1,0 +1,18 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 23,
+    "patch": 0
+  },
+  "include": [],
+  "configurePresets": [
+    {
+      "name": "default-base",
+      "hidden": true,
+      "binaryDir": "${sourceParentDir}/build/${presetName}"
+    }
+  ],
+  "buildPresets": [],
+  "testPresets": []
+}

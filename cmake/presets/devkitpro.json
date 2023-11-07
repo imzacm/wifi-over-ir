@@ -1,0 +1,43 @@
+{
+  "version": 6,
+  "include": [
+    "base.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "devkitpro-base",
+      "inherits": "default-base",
+      "hidden": true,
+      "cacheVariables": {},
+      "environment": {
+        "DEVKITARM": "$env{DEVKITPRO}/devkitARM",
+        "DEVKITPPC": "$env{DEVKITPRO}/devkitPPC"
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "intelliSenseMode": "linux-gcc-arm"
+        }
+      }
+    },
+    {
+      "name": "devkitpro-arm",
+      "inherits": "devkitpro-base",
+      "hidden": true,
+      "displayName": "DevkitPro (ARM)",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "$env{DEVKITARM}/bin/arm-none-eabi-gcc",
+        "CMAKE_CXX_COMPILER": "$env{DEVKITARM}/bin/arm-none-eabi-g++"
+      }
+    },
+    {
+      "name": "devkitpro-arm-3ds",
+      "inherits": "devkitpro-arm",
+      "hidden": true,
+      "displayName": "DevkitPro (3DS)",
+      "description": "Build for 3DS using DevkitPro",
+      "toolchainFile": "$env{DEVKITPRO}/cmake/3DS.cmake"
+    }
+  ],
+  "buildPresets": [],
+  "testPresets": []
+}
