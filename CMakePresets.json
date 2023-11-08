@@ -1,0 +1,88 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 23,
+    "patch": 0
+  },
+  "include": [],
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/build/${presetName}"
+    },
+    {
+      "name": "watcom",
+      "inherits": "base",
+      "hidden": true,
+      "generator": "Watcom WMake",
+      "cacheVariables": {
+        "CMAKE_C_FLAGS": "-za99",
+        "CMAKE_CXX_FLAGS": "-ze"
+      },
+      "environment": {
+        "PATH": "$env{WATCOM}/binl64:$env{WATCOM}/binl:$penv{PATH}",
+        "INCLUDE": "$env{WATCOM}/lh:$env{WATCOM}/h:$penv{INCLUDE}",
+        "EDPATH": "$env{WATCOM}/eddat",
+        "WIPFC": "$env{WATCOM}/wipfc"
+      }
+    },
+    {
+      "name": "watcom-dos16",
+      "inherits": "watcom",
+      "hidden": true,
+      "displayName": "OpenWatcom V2 (DOS 16-bit)",
+      "description": "Build 16-bit DOS using OpenWatcom V2",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "wcl",
+        "CMAKE_CXX_COMPILER": "wcl",
+        "CMAKE_SYSTEM_NAME": "DOS",
+        "CMAKE_SYSTEM_PROCESSOR": "I86"
+      },
+      "warnings": {
+        "unusedCli": false
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "intelliSenseMode": "windows-msvc-x86"
+        }
+      }
+    },
+    {
+      "name": "devkitpro",
+      "inherits": "base",
+      "hidden": true,
+      "cacheVariables": {},
+      "environment": {
+        "DEVKITARM": "$env{DEVKITPRO}/devkitARM",
+        "DEVKITPPC": "$env{DEVKITPRO}/devkitPPC"
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "intelliSenseMode": "linux-gcc-arm"
+        }
+      }
+    },
+    {
+      "name": "devkitpro-arm",
+      "inherits": "devkitpro",
+      "hidden": true,
+      "displayName": "devkitPro (ARM)",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "$env{DEVKITARM}/bin/arm-none-eabi-gcc",
+        "CMAKE_CXX_COMPILER": "$env{DEVKITARM}/bin/arm-none-eabi-g++"
+      }
+    },
+    {
+      "name": "devkitpro-arm-3ds",
+      "inherits": "devkitpro-arm",
+      "hidden": true,
+      "displayName": "devkitPro (3DS)",
+      "description": "Build for 3DS using devkitPro",
+      "toolchainFile": "$env{DEVKITPRO}/cmake/3DS.cmake"
+    }
+  ],
+  "buildPresets": [],
+  "testPresets": []
+}

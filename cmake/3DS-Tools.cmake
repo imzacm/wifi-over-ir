@@ -72,7 +72,7 @@ function(ctr_create_banner)
 endfunction()
 
 function(ctr_create_cia target)
-    cmake_parse_arguments(PARSE_ARGV 1 CIA "STRIP" "TARGET;OUTPUT;RSF;BANNER;ICON" "")
+    cmake_parse_arguments(PARSE_ARGV 1 CIA "STRIP" "TARGET;OUTPUT;RSF;BANNER;ICON;RSF_TITLE;RSF_PRODUCT_CODE;RSF_UNIQUE_ID;RSF_SYSTEM_MODE;RSF_SYSTEM_MODE_EXT;RSF_CATEGORY;RSF_USE_ON_SD;RSF_MEMORY_TYPE;RSF_CPU_SPEED;RSF_ENABLE_L2_CACHE" "")
 
     if(DEFINED CIA_TARGET)
         set(CIA_IN_TARGET "${CIA_TARGET}")
@@ -103,6 +103,72 @@ function(ctr_create_cia target)
         get_filename_component(CIA_RSF "${CIA_RSF}" ABSOLUTE)
         list(APPEND CIA_MAKEROM_ARGS -rsf "${CIA_RSF}")
         list(APPEND CIA_MAKEROM_DEPS "${CIA_RSF}")
+    else()
+        get_filename_component(CIA_RSF "${CMAKE_CURRENT_FUNCTION_LIST_DIR}/3DS-template-cia.rsf" ABSOLUTE)
+        list(APPEND CIA_MAKEROM_ARGS
+            -rsf "${CIA_RSF}"
+            -major "${CMAKE_PROJECT_VERSION_MAJOR}"
+            -minor "${CMAKE_PROJECT_VERSION_MINOR}"
+            -micro "${CMAKE_PROJECT_VERSION_PATCH}"
+            "-DAPP_VERSION_MAJOR=${CMAKE_PROJECT_VERSION_MAJOR}"
+            -DAPP_ENCRYPTED=false)
+        list(APPEND CIA_MAKEROM_DEPS "${CIA_RSF}")
+
+        if(DEFINED CIA_RSF_TITLE)
+            list(APPEND CIA_MAKEROM_ARGS "-DAPP_TITLE=${CIA_RSF_TITLE}")
+        else()
+            list(APPEND CIA_MAKEROM_ARGS "-DAPP_TITLE=${CMAKE_PROJECT_NAME}")
+        endif()
+
+        if(DEFINED CIA_RSF_PRODUCT_CODE)
+            list(APPEND CIA_MAKEROM_ARGS "-DAPP_PRODUCT_CODE=${CIA_RSF_PRODUCT_CODE}")
+        endif()
+
+        if(DEFINED CIA_RSF_UNIQUE_ID)
+            list(APPEND CIA_MAKEROM_ARGS "-DAPP_UNIQUE_ID=${CIA_RSF_UNIQUE_ID}")
+        endif()
+
+        if(DEFINED CIA_RSF_SYSTEM_MODE)
+            list(APPEND CIA_MAKEROM_ARGS "-DAPP_SYSTEM_MODE=${CIA_RSF_SYSTEM_MODE}")
+        else()
+            list(APPEND CIA_MAKEROM_ARGS "-DAPP_SYSTEM_MODE=64MB")
+        endif()
+
+        if(DEFINED CIA_RSF_SYSTEM_MODE_EXT)
+            list(APPEND CIA_MAKEROM_ARGS "-DAPP_SYSTEM_MODE_EXT=${CIA_RSF_SYSTEM_MODE_EXT}")
+        else()
+            list(APPEND CIA_MAKEROM_ARGS "-DAPP_SYSTEM_MODE_EXT=Legacy")
+        endif()
+
+        if(DEFINED CIA_RSF_CATEGORY)
+            list(APPEND CIA_MAKEROM_ARGS "-DAPP_CATEGORY=${CIA_RSF_CATEGORY}")
+        else()
+            list(APPEND CIA_MAKEROM_ARGS "-DAPP_CATEGORY=Application")
+        endif()
+
+        if(DEFINED CIA_RSF_USE_ON_SD)
+            list(APPEND CIA_MAKEROM_ARGS "-DAPP_USE_ON_SD=${CIA_RSF_USE_ON_SD}")
+        else()
+            list(APPEND CIA_MAKEROM_ARGS "-DAPP_USE_ON_SD=true")
+        endif()
+
+        if(DEFINED CIA_RSF_MEMORY_TYPE)
+            list(APPEND CIA_MAKEROM_ARGS "-DAPP_MEMORY_TYPE=${CIA_RSF_MEMORY_TYPE}")
+        else()
+            list(APPEND CIA_MAKEROM_ARGS "-DAPP_MEMORY_TYPE=Application")
+        endif()
+
+        if(DEFINED CIA_RSF_CPU_SPEED)
+            list(APPEND CIA_MAKEROM_ARGS "-DAPP_CPU_SPEED=${CIA_RSF_CPU_SPEED}")
+        else()
+            list(APPEND CIA_MAKEROM_ARGS "-DAPP_CPU_SPEED=268MHz")
+        endif()
+
+        if(DEFINED CIA_RSF_ENABLE_L2_CACHE)
+            list(APPEND CIA_MAKEROM_ARGS "-DAPP_ENABLE_L2_CACHE=${CIA_RSF_ENABLE_L2_CACHE}")
+        else()
+            list(APPEND CIA_MAKEROM_ARGS "-DAPP_ENABLE_L2_CACHE=false")
+        endif()
     endif()
 
     if(DEFINED CIA_BANNER)

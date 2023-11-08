@@ -1,7 +1,0 @@
-{
-    "cmake.useCMakePresets": "always",
-    "cmake.sourceDirectory": [
-        "${workspaceFolder}/client",
-        "${workspaceFolder}/gateway"
-    ]
-}

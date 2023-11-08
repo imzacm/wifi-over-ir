@@ -49,20 +49,20 @@ static inline void IRFMAT_write(IRFMAT value) {
     Hornet_write_reg(IRFMAT_INDEX, val.raw);
 }
 
-int main() {
-    printf("Hello DOS\n");
+// int main() {
+//     printf("Hello DOS\n");
 
-    IRFMAT irfmat = IRFMAT_read();
-    printf("IRFMAT:\n");
-    printf("  RED=%d\n", irfmat.RED);
-    printf("  MDLTE=%d\n", irfmat.MDLTE);
-    printf("  IRURT=%d\n", irfmat.IRURT);
-    printf("  MDSEL=%d\n", irfmat.MDSEL);
-    printf("  PMOD=%d\n", irfmat.PMOD);
-    printf("  LBF=%d\n", irfmat.LBF);
-    printf("  ELBE=%d\n", irfmat.ELBE);
-    printf("  invert=%d\n", irfmat.invert);
-    printf("\n");
+//     IRFMAT irfmat = IRFMAT_read();
+//     printf("IRFMAT:\n");
+//     printf("  RED=%d\n", irfmat.RED);
+//     printf("  MDLTE=%d\n", irfmat.MDLTE);
+//     printf("  IRURT=%d\n", irfmat.IRURT);
+//     printf("  MDSEL=%d\n", irfmat.MDSEL);
+//     printf("  PMOD=%d\n", irfmat.PMOD);
+//     printf("  LBF=%d\n", irfmat.LBF);
+//     printf("  ELBE=%d\n", irfmat.ELBE);
+//     printf("  invert=%d\n", irfmat.invert);
+//     printf("\n");
 
-    return 0;
-}
+//     return 0;
+// }

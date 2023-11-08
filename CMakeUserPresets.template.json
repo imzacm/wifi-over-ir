@@ -1,9 +1,6 @@
 {
   "version": 6,
-  "include": [
-    "cmake/presets/devkitpro.json",
-    "cmake/presets/watcom.json"
-  ],
+  "include": [],
   "configurePresets": [
     {
       "name": "watcom-dos16-debug",
