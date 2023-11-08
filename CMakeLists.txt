@@ -21,25 +21,22 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 endif()
 
+add_subdirectory(protocol)
+
 add_executable(woi
-  src/result.c
-  src/main.c)
-target_include_directories(woi PRIVATE includes)
+  src/client.c
+  src/gateway.c)
 
 if(NINTENDO_3DS)
-  add_library(woi-platform-3ds OBJECT
-    src/platform/3ds-init.c)
-  target_include_directories(woi-platform-3ds PRIVATE includes)
-
-  target_link_libraries(woi PRIVATE woi-platform-3ds)
+  target_sources(woi PRIVATE src/platform-3ds/main.c)
 elseif(DOS)
-  add_library(woi-platform-dos OBJECT
-    src/platform/dos-init.c
-    src/platform/dos-hornet.c)
-  target_include_directories(woi-platform-dos PRIVATE includes)
-
-  target_link_libraries(woi PRIVATE woi-platform-dos)
+  target_sources(woi PRIVATE src/platform-dos/main.c)
 endif()
+
+target_link_libraries(woi PRIVATE woi_protocol)
+
+find_package(log_h)
+target_link_libraries(woi PRIVATE log_h)
 
 if(NINTENDO_3DS)
   include(3DS-Tools)
