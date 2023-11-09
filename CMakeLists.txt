@@ -45,14 +45,14 @@ if(NINTENDO_3DS)
   set(WOI_ASSET_BANNER_IMAGE "${WOI_ASSETS_DIR}/banner-256x128.png")
   set(WOI_ASSET_BANNER_AUDIO "${WOI_ASSETS_DIR}/banner-audio.wav")
 
-  set(WOI_SMDH "${CMAKE_CURRENT_BINARY_DIR}/woi-gateway.smdh")
-  set(WOI_3dsx "${CMAKE_CURRENT_BINARY_DIR}/woi-gateway.3dsx")
-  set(WOI_CIA "${CMAKE_CURRENT_BINARY_DIR}/woi-gateway.cia")
-  set(WOI_BANNER "${CMAKE_CURRENT_BINARY_DIR}/woi-gateway.bnr")
+  set(WOI_SMDH "${CMAKE_CURRENT_BINARY_DIR}/woi.smdh")
+  set(WOI_3dsx "${CMAKE_CURRENT_BINARY_DIR}/woi.3dsx")
+  set(WOI_CIA "${CMAKE_CURRENT_BINARY_DIR}/woi.cia")
+  set(WOI_BANNER "${CMAKE_CURRENT_BINARY_DIR}/woi.bnr")
 
   ctr_generate_smdh(
     OUTPUT "${WOI_SMDH}"
-    NAME "${CMAKE_PROJECT_NAME}"
+    NAME "${CMAKE_PROJECT_NAME}-${CMAKE_BUILD_TYPE}"
     DESCRIPTION "${CMAKE_PROJECT_DESCRIPTION}"
     AUTHOR "${PROJECT_AUTHOR}"
     ICON "${WOI_ASSET_ICON}"
